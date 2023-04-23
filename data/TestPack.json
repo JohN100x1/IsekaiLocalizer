@@ -1,0 +1,59 @@
+{
+  "LocalizedStrings": [
+    {
+      "Key": "714b99be4cc74d8ea02500d4c7cffa4e",
+      "SimpleName": "$IsekaiProtagonistSpellbook.Name",
+      "ProcessTemplates": false,
+      "enGB": "Isekai Protagonist",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    },
+    {
+      "Key": "457405fbd37c412f96c2be6b5109c612",
+      "SimpleName": "PlotArmor.Description",
+      "ProcessTemplates": true,
+      "enGB": "You gain a luck bonus to {g|Encyclopedia:Armor_Class}AC{/g} and all {g|Encyclopedia:Saving_Throw}saving throws{/g} equal to your character level.",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    },
+    {
+      "Key": "f161809e34be41d69fead36851be775a",
+      "SimpleName": "UnlimitedPowerAbility.Name",
+      "ProcessTemplates": false,
+      "enGB": "Overpowered Ability — Unlimited Power",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    },
+    {
+      "Key": "ac27deaf79654a76a107f202cbc6d7a1",
+      "SimpleName": "IsekaiDialogueHorgusReply.Text",
+      "ProcessTemplates": false,
+      "enGB": "\"My daughter?\" {n}Horgus takes a quick glance at Camellia.{/n} \"I don't think you know what sort of person she is. {n}Horgus takes a breath.{/n} Regardless, it seems my previous offer was somewhat insulting. Two thousand gold it is.\"",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    },
+    {
+      "Key": "93e8122c42ad42eea553345845569377",
+      "SimpleName": "FriendlyAura.Description",
+      "ProcessTemplates": false,
+      "enGB": "You emit an aura of friendship that cause enemies to subconsciously hold back.\nEnemies within 40 feet take a –4 penalty on attack and damage rolls.",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    }
+  ]
+}
