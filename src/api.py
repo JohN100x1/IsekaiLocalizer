@@ -22,7 +22,7 @@ class ChatAPI(ABC):
 class OraAPI(ChatAPI):
     system_prompt = (
         "You are ChatGPT, a large language model trained by OpenAI. "
-        "Answer as concisely as possible"
+        "Answer only in a json code block."
     )
     description = "ChatGPT Openai Language Model"
     slug = "gpt-3.5"
