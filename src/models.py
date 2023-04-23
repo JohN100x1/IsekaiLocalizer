@@ -17,5 +17,5 @@ class LocalizedString(Struct):
     esES: str | None
 
 
-class LocalisationPack(Struct):
+class LocalizationPack(Struct):
     LocalizedStrings: list[LocalizedString]
