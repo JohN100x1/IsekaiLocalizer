@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from random import randint
 from typing import Self
 from uuid import uuid4
@@ -5,7 +6,20 @@ from uuid import uuid4
 from requests import post
 
 
-class OraAPI:
+class ChatAPI(ABC):
+    @classmethod
+    @abstractmethod
+    def create(cls) -> Self:
+        """Create an instance of the ChatAPI"""
+        ...
+
+    @abstractmethod
+    def chat(self, prompt: str) -> str:
+        """Chat with the API using a prompt."""
+        ...
+
+
+class OraAPI(ChatAPI):
     system_prompt = (
         "You are ChatGPT, a large language model trained by OpenAI. "
         "Answer as concisely as possible"
@@ -25,7 +39,8 @@ class OraAPI:
             "https://ora.sh/api/assistant",
             headers={
                 "Origin": "https://ora.sh",
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; "
+                "rv:109.0) Gecko/20100101 Firefox/112.0",
                 "Referer": "https://ora.sh/",
                 "Host": "ora.sh",
             },
@@ -36,7 +51,7 @@ class OraAPI:
                 "description": cls.description,
             },
         ).json()
-        return OraAPI(
+        return cls(
             chat_id=response_json["id"],
             created_by=response_json["createdBy"],
             created_at=response_json["createdAt"],
@@ -48,7 +63,8 @@ class OraAPI:
             headers={
                 "host": "ora.sh",
                 "authorization": f"Bearer AY0{randint(1111, 9999)}",
-                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; "
+                "rv:109.0) Gecko/20100101 Firefox/112.0",
                 "origin": "https://ora.sh",
                 "referer": "https://ora.sh/chat/",
             },
