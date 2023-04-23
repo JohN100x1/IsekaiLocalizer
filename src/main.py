@@ -33,8 +33,8 @@ class PackLocalizer:
         return (
             "For each object in the list, translate the value of 'enGB' to "
             "russian, german, french, chinese, and spanish and replace the "
-            "corresponding null value with that translation"
-            f"\n```{entries_json}```"
+            "corresponding null value with that translation\n"
+            f"```{entries_json}```"
         )
 
     @staticmethod
@@ -47,7 +47,7 @@ class PackLocalizer:
     ) -> LocalizationPack:
         """Localize the localization pack in batches."""
         pack_translated = LocalizationPack(LocalizedStrings=[])
-        n = len(pack.LocalizedStrings) / batch_size
+        n = (len(pack.LocalizedStrings) - 1) // batch_size + 1
         for i in range(0, len(pack.LocalizedStrings), batch_size):
             entries = pack.LocalizedStrings[i : i + batch_size]
             entries_json = json_encode(entries).decode("utf-8")
@@ -86,4 +86,4 @@ if __name__ == "__main__":
         Path(__file__).parent.parent / "data" / "TestPack.json"
     )
     localizer = PackLocalizer()
-    localizer.localize(path_localization_pack, batch_size=1)
+    localizer.localize(path_localization_pack, batch_size=2)
