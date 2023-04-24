@@ -1,19 +1,21 @@
-import re
+import asyncio
 from pathlib import Path
 
 from msgspec.json import decode as json_decode
 from msgspec.json import encode as json_encode
 from msgspec.json import format as json_format
 
-from api import ChatAPI, OraAPI
-from models import LocalizationPack, LocalizedString
+from api import OraAPI, TranslatorAPI
+from models import LocalizationPack
 
 
 class PackLocalizer:
-    DEFAULT_CHATAPI = OraAPI
+    DEFAULT_TRANSLATOR_API = OraAPI
 
-    def __init__(self, chat_api: ChatAPI | None = None):
-        self.chat_api = chat_api or self.DEFAULT_CHATAPI.create()
+    def __init__(self, translator_api: TranslatorAPI | None = None):
+        self.translator_api = (
+            translator_api or self.DEFAULT_TRANSLATOR_API.create()
+        )
 
     @staticmethod
     def load(path: Path) -> LocalizationPack:
@@ -27,39 +29,6 @@ class PackLocalizer:
         with open(path, "wb") as file:
             file.write(json_format(json_encode(pack), indent=indent))
 
-    @staticmethod
-    def __get_prompt(entries_json: str) -> str:
-        """Create prompt to get translation for entries."""
-        return (
-            "For each object in the list, translate the value of 'enGB' to "
-            "russian, german, french, chinese, and spanish and replace the "
-            "corresponding null value with that translation\n"
-            f"```{entries_json}```"
-        )
-
-    @staticmethod
-    def __extract_code_block(reply: str) -> str:
-        """Extract a code block from a string."""
-        return re.findall(r"```[\s\S]*```", reply)[0]
-
-    def localize_pack(
-        self, pack: LocalizationPack, batch_size: int = 16
-    ) -> LocalizationPack:
-        """Localize the localization pack in batches."""
-        pack_translated = LocalizationPack(LocalizedStrings=[])
-        n = (len(pack.LocalizedStrings) - 1) // batch_size + 1
-        for i in range(0, len(pack.LocalizedStrings), batch_size):
-            entries = pack.LocalizedStrings[i : i + batch_size]
-            entries_json = json_encode(entries).decode("utf-8")
-            # TODO: pray for no errors here
-            reply = self.chat_api.chat(self.__get_prompt(entries_json))
-            code_block = self.__extract_code_block(reply)
-            translation = code_block.replace("```json", "").replace("```", "")
-            trans_json = json_decode(translation, type=list[LocalizedString])
-            pack_translated.LocalizedStrings.extend(trans_json)
-            print(f"{(i+1)/n:.3%}")
-        return pack_translated
-
     def localize(
         self,
         path: Path,
@@ -69,7 +38,9 @@ class PackLocalizer:
     ):
         """Localize the localization pack from path and save it."""
         pack = self.load(path)
-        pack_translated = self.localize_pack(pack, batch_size)
+        pack_translated = asyncio.run(
+            self.translator_api.translate(pack, batch_size)
+        )
 
         if replace:
             save_path = path
