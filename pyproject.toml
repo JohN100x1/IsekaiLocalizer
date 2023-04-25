@@ -10,8 +10,8 @@ python = "^3.11"
 msgspec = "^0.14.1"
 python-dotenv = "^1.0.0"
 setuptools = "^67.7.1"
-requests = "^2.28.2"
 aiohttp = "^3.8.4"
+loguru = "^0.7.0"
 
 [tool.poetry.dev-dependencies]
 black = "^23.3.0"

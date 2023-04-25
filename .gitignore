@@ -1,4 +1,5 @@
 data/LocalizationPack.json
+data/LocalizationPackTranslated.json
 data/TestPackTranslated.json
 .mypy_cache
 .idea

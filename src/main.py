@@ -29,19 +29,10 @@ class PackLocalizer:
         with open(path, "wb") as file:
             file.write(json_format(json_encode(pack), indent=indent))
 
-    def localize(
-        self,
-        path: Path,
-        replace: bool = False,
-        batch_size: int = 16,
-        indent: int = 2,
-    ):
+    def localize(self, path: Path, replace: bool = False, indent: int = 2):
         """Localize the localization pack from path and save it."""
         pack = self.load(path)
-        pack_translated = asyncio.run(
-            self.translator_api.translate(pack, batch_size)
-        )
-
+        pack_translated = asyncio.run(self.translator_api.translate(pack))
         if replace:
             save_path = path
         else:
@@ -50,11 +41,7 @@ class PackLocalizer:
 
 
 if __name__ == "__main__":
-    # path_localization_pack = (
-    #     Path(__file__).parent.parent / "data" / "LocalizationPack.json"
-    # )
-    path_localization_pack = (
-        Path(__file__).parent.parent / "data" / "TestPack.json"
-    )
+    path_pack = Path(__file__).parent.parent / "data" / "LocalizationPack.json"
+    # path_pack = Path(__file__).parent.parent / "data" / "TestPack.json"
     localizer = PackLocalizer()
-    localizer.localize(path_localization_pack, batch_size=2)
+    localizer.localize(path_pack)
