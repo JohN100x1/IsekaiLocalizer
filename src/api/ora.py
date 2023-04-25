@@ -80,7 +80,7 @@ class OraAPI(TranslatorAPI):
         max_retries: int = 3,
     ) -> LocalizedString:
         """Get the translation for a LocalizedString."""
-        if len(entry.enGB) >= self.ORA_CHAR_LIMIT:
+        if len(entry.enGB or "") >= self.ORA_CHAR_LIMIT:
             logger.warning(
                 f"{entry.SimpleName} exceeds {self.ORA_CHAR_LIMIT} "
                 "characters; cannot translate."
@@ -95,7 +95,7 @@ class OraAPI(TranslatorAPI):
             "rv:109.0) Gecko/20100101 Firefox/112.0",
             "origin": "https://ora.sh",
             "referer": "https://ora.sh/chat/",
-        }
+        }  # TODO: add x-signed-token to header
         data_json = {
             "chatbotId": self.chat_id,
             "input": entry.enGB,
@@ -105,14 +105,17 @@ class OraAPI(TranslatorAPI):
             "includeHistory": False,
         }
         retry_count = 0
+        errors: list[dict] = []
         while retry_count < max_retries:
             async with session.post(
                 url, headers=headers, json=data_json
             ) as response:
+                response_json = await response.json()
                 if response.status != 200:
                     retry_count += 1
+                    errors.append(response_json["error"])
                     continue
-                reply: str = (await response.json())["response"]
+                reply: str = response_json["response"]
                 try:
                     reply_json = re.findall(r"\{[\s\S]*}", reply)[0]
                     translation = json_decode(reply_json, type=Translation)
@@ -121,11 +124,11 @@ class OraAPI(TranslatorAPI):
                         SimpleName=entry.SimpleName,
                         ProcessTemplates=entry.ProcessTemplates,
                         enGB=entry.enGB,
-                        ruRU=translation.ruRU,
-                        deDE=translation.deDE,
-                        frFR=translation.frFR,
-                        zhCN=translation.zhCN,
-                        esES=translation.esES,
+                        ruRU=entry.ruRU if entry.ruRU else translation.ruRU,
+                        deDE=entry.deDE if entry.deDE else translation.deDE,
+                        frFR=entry.frFR if entry.frFR else translation.frFR,
+                        zhCN=entry.zhCN if entry.zhCN else translation.zhCN,
+                        esES=entry.esES if entry.esES else translation.esES,
                     )
                 except DecodeError:
                     logger.error(
@@ -134,9 +137,11 @@ class OraAPI(TranslatorAPI):
                         f"{reply}"
                     )
                     return entry
+        error_msg = "\n".join(str(err) for err in errors)
         logger.warning(
             f"Tried to translate {entry.SimpleName} but failed "
-            f"after {max_retries=}; cannot translate."
+            f"after {max_retries=}. Ora api returned these errors:\n"
+            f"{error_msg}"
         )
         return entry
 

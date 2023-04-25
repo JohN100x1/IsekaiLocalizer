@@ -6,7 +6,6 @@ from msgspec.json import encode as json_encode
 from msgspec.json import format as json_format
 
 from api import TranslatorAPI
-from api.ora import OraAPI
 from models import LocalizationPack
 
 
@@ -25,13 +24,9 @@ class PackSerializer:
 
 
 class PackTranslator:
-    DEFAULT_TRANSLATOR_API = OraAPI
+    def __init__(self, translator_api: TranslatorAPI):
+        self.translator_api = translator_api
 
-    def __init__(self, translator_api: TranslatorAPI | None = None):
-        self.translator_api = (
-            translator_api or self.DEFAULT_TRANSLATOR_API.create()
-        )
-
-    def translate(self, pack: LocalizationPack):
+    def translate(self, pack: LocalizationPack) -> LocalizationPack:
         """Translate the localization pack."""
         return asyncio.run(self.translator_api.translate(pack))

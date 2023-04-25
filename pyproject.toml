@@ -12,6 +12,7 @@ python-dotenv = "^1.0.0"
 setuptools = "^67.7.1"
 aiohttp = "^3.8.4"
 loguru = "^0.7.0"
+revchatgpt = "^5.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "^23.3.0"

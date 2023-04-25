@@ -1,14 +1,17 @@
 from pathlib import Path
 
+from api.openai import OpenAIAPI
 from pack_processors import PackSerializer, PackTranslator
 
 if __name__ == "__main__":
     replace: bool = False
     json_indent: int = 2
+    max_retries: int = 3
 
-    path_pack = Path(__file__).parent.parent / "data" / "LocalizationPack.json"
-    # path_pack = Path(__file__).parent.parent / "data" / "TestPack.json"
-    translator = PackTranslator()
+    # path_pack = Path(__file__).parent.parent / "data" / "LocalizationPack.json"
+    path_pack = Path(__file__).parent.parent / "data" / "TestPack.json"
+    translator_api = OpenAIAPI.create()
+    translator = PackTranslator(translator_api)
     serializer = PackSerializer()
 
     pack_original = serializer.load(path_pack)

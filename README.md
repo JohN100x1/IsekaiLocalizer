@@ -53,7 +53,9 @@ Requirements:
 
 1. Place your `LocalizationPack.json` in the `data` folder.
 2. Install dependencies using `poetry install` in your terminal.
-3. Run `main.py` using `python main.py` in your terminal.
+3. Create Open AI account and get your access token from here https://chat.openai.com/api/auth/session.
+4. Rename `example.env` to `.env` and set `OPENAI_ACCESS_TOKEN` to your access token.
+5. Run `main.py` using `python main.py` in your terminal.
 
 ## TODO
 - Address Bad translations
