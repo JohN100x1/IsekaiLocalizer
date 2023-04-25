@@ -4,7 +4,7 @@ the output `LocalizationPackTranslated.json` will have `null` values filled
 using the translated English value. Currently only supports translation from
 English to the other languages.
 
-Disclaimer: the results are from ChatGPT so you may not get accurate results.
+Disclaimer: the results are from ChatGPT, so you may not get accurate results.
 ### Example
 `LocalizationPack.json`
 ```json

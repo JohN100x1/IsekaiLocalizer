@@ -1,5 +1,4 @@
 import re
-from abc import ABC, abstractmethod
 from asyncio import Task, create_task, gather, run
 from random import randint
 from typing import Self
@@ -10,20 +9,8 @@ from loguru import logger
 from msgspec import DecodeError
 from msgspec.json import decode as json_decode
 
+from api import TranslatorAPI
 from models import LocalizationPack, LocalizedString, Translation
-
-
-class TranslatorAPI(ABC):
-    @classmethod
-    @abstractmethod
-    def create(cls) -> Self:
-        """Create an instance of the TranslatorAPI."""
-        ...
-
-    @abstractmethod
-    async def translate(self, pack: LocalizationPack) -> LocalizationPack:
-        """Translate the localization pack from enGB."""
-        ...
 
 
 class OraAPI(TranslatorAPI):
