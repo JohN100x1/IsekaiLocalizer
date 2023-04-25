@@ -125,6 +125,7 @@ class OpenAIAPI(TranslatorAPI):
                 )
             )
             print(f"Entries translated: {i} ({i/n:.3%})")
+        await chatbot.delete_conversation(conversation_id)
         return LocalizationPack(LocalizedStrings=localised_strings)
 
 
