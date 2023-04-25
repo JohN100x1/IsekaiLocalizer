@@ -1,6 +1,47 @@
 # IsekaiLocalizer
-Create localization using ChatGPT.
+Create localization using ChatGPT. For an input `LocalizationPack.json`,
+the output `LocalizationPackTranslated.json` will have `null` values filled
+using the translated English value. Currently only supports translation from
+English to the other languages.
 
+Disclaimer: the results are from ChatGPT so you may not get accurate results.
+### Example
+`LocalizationPack.json`
+```json
+{
+  "LocalizedStrings": [
+    {
+      "Key": "714b99be4cc74d8ea02500d4c7cffa4e",
+      "SimpleName": "$IsekaiProtagonistSpellbook.Name",
+      "ProcessTemplates": false,
+      "enGB": "Isekai Protagonist",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    }
+  ]
+}
+```
+Becomes `LocalizationPackTranslated.json`
+```json
+{
+  "LocalizedStrings": [
+    {
+      "Key": "714b99be4cc74d8ea02500d4c7cffa4e",
+      "SimpleName": "$IsekaiProtagonistSpellbook.Name",
+      "ProcessTemplates": false,
+      "enGB": "Isekai Protagonist",
+      "ruRU": "Исекай Протагонист",
+      "deDE": "Isekai-Protagonist",
+      "frFR": "Protagoniste d'Isekai",
+      "zhCN": "异世界主角",
+      "esES": "Protagonista de Isekai"
+    }
+  ]
+}
+```
 ## Usage
 Requirements:
 - [Python 3.11](https://www.python.org/downloads/) or above
@@ -11,9 +52,10 @@ Requirements:
 3. Run `main.py` using `python main.py` in your terminal.
 
 ## TODO
-- Bad translations
-- Bad prompt for ChatGPT
-- Invalid response from ChatGPT
-- Timeout from API after `max_retries=3`
-- 1000 character limitation for ora.sh endpoint
-- Missing `Override` and `fill missing` options for localized string.
+- Address Bad translations
+- Address Bad prompt for ChatGPT
+- Address Invalid response or when ChatGPT asks clarification questions
+- Address Timeout from API after `max_retries=3`
+- Address 1000 character limitation for ora.sh endpoint (use different endpoint?)
+- Add option to replace the same `LocalizationPack.json`.
+  - Add `Override` and `fill missing` options for localized string entries.
