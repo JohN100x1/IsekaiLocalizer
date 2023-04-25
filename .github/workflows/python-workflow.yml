@@ -1,0 +1,31 @@
+name: Tests
+
+on: push
+
+jobs:
+  build:
+    name: Setup Python Poetry Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'
+
+      - name: Setup Poetry
+        run: pip install poetry
+
+      - name: Install Dependencies
+        run: poetry install
+
+      - name: Run pytest
+        run: poetry run pytest
+
+      - name: Run black
+        run: poetry run black . --check
+
+      - name: Run isort
+        run: poetry run isort . --check
