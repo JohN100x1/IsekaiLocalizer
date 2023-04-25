@@ -9,14 +9,7 @@ from api import OraAPI, TranslatorAPI
 from models import LocalizationPack
 
 
-class PackLocalizer:
-    DEFAULT_TRANSLATOR_API = OraAPI
-
-    def __init__(self, translator_api: TranslatorAPI | None = None):
-        self.translator_api = (
-            translator_api or self.DEFAULT_TRANSLATOR_API.create()
-        )
-
+class PackSerializer:
     @staticmethod
     def load(path: Path) -> LocalizationPack:
         """Load the localization pack from a specified path."""
@@ -29,19 +22,35 @@ class PackLocalizer:
         with open(path, "wb") as file:
             file.write(json_format(json_encode(pack), indent=indent))
 
-    def localize(self, path: Path, replace: bool = False, indent: int = 2):
+
+class PackLocalizer:
+    DEFAULT_TRANSLATOR_API = OraAPI
+
+    def __init__(self, translator_api: TranslatorAPI | None = None):
+        self.translator_api = (
+            translator_api or self.DEFAULT_TRANSLATOR_API.create()
+        )
+
+    def localize(self, pack: LocalizationPack):
         """Localize the localization pack from path and save it."""
-        pack = self.load(path)
-        pack_translated = asyncio.run(self.translator_api.translate(pack))
-        if replace:
-            save_path = path
-        else:
-            save_path = path.with_name(f"{path.stem}Translated{path.suffix}")
-        self.save(save_path, pack_translated, indent=indent)
+        return asyncio.run(self.translator_api.translate(pack))
 
 
 if __name__ == "__main__":
+    replace: bool = False
+    json_indent: int = 2
+
     path_pack = Path(__file__).parent.parent / "data" / "LocalizationPack.json"
     # path_pack = Path(__file__).parent.parent / "data" / "TestPack.json"
     localizer = PackLocalizer()
-    localizer.localize(path_pack)
+    serializer = PackSerializer()
+
+    pack_original = serializer.load(path_pack)
+    pack_translated = localizer.localize(pack_original)
+    if replace:
+        save_path = path_pack
+    else:
+        save_path = path_pack.with_name(
+            f"{path_pack.stem}Translated{path_pack.suffix}"
+        )
+    serializer.save(save_path, pack_translated, indent=json_indent)
