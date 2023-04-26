@@ -1,6 +1,6 @@
 import os
 import re
-from asyncio import Task, create_task, gather, run
+from asyncio import Task, create_task, run
 from pathlib import Path
 from typing import Self
 
@@ -23,14 +23,11 @@ class OpenAIAPI(TranslatorAPI):
         "and spanish (esES) and return a json object where the language ISO "
         "is the key and the translation is the value. Do not return anything "
         "other than the json object and will do your best at translating in "
-        "the context of homebrew Pathfinder class, feat, and ability names "
-        "and descriptions. The object should follow this format with the null "
-        "values replaced with the corresponding translation:\n"
+        "the context of homebrew Pathfinder feature names and descriptions. "
+        "The object should follow this format with the null values replaced "
+        "with the corresponding translation:\n"
         '{"ruRU": null,"deDE": null,"frFR": null,"zhCN": null,"esES": null}'
     )
-    DESC = "ChatGPT Openai Language Model"
-    SLUG = "gpt-3.5"
-    MODEL = "gpt-3.5-turbo"
 
     def __init__(self, access_token: str):
         self.access_token = access_token
@@ -62,31 +59,32 @@ class OpenAIAPI(TranslatorAPI):
         retry_count = 0
         errors: list[Exception] = []
         while retry_count < max_retries:
+            reply: str = ""
             async for response in chatbot.ask(entry.enGB, conversation_id):
-                try:
-                    reply: str = response["message"]
-                    reply_json = re.findall(r"\{[\s\S]*}", reply)[0]
-                    translation = json_decode(reply_json, type=Translation)
-                    return LocalizedString(
-                        Key=entry.Key,
-                        SimpleName=entry.SimpleName,
-                        ProcessTemplates=entry.ProcessTemplates,
-                        enGB=entry.enGB,
-                        ruRU=entry.ruRU if entry.ruRU else translation.ruRU,
-                        deDE=entry.deDE if entry.deDE else translation.deDE,
-                        frFR=entry.frFR if entry.frFR else translation.frFR,
-                        zhCN=entry.zhCN if entry.zhCN else translation.zhCN,
-                        esES=entry.esES if entry.esES else translation.esES,
-                    )
-                except DecodeError:
-                    logger.error(
-                        f"Tried to translate {entry.SimpleName} but "
-                        "a json decode error occurred. Tried to parse this:\n"
-                        f"{response['message']}"
-                    )
-                    return entry
-                except Exception as err:
-                    errors.append(err)
+                reply = response["message"]
+            try:
+                reply_json = re.findall(r"\{[\s\S]*}", reply)[0]
+                translation = json_decode(reply_json, type=Translation)
+                return LocalizedString(
+                    Key=entry.Key,
+                    SimpleName=entry.SimpleName,
+                    ProcessTemplates=entry.ProcessTemplates,
+                    enGB=entry.enGB,
+                    ruRU=entry.ruRU if entry.ruRU else translation.ruRU,
+                    deDE=entry.deDE if entry.deDE else translation.deDE,
+                    frFR=entry.frFR if entry.frFR else translation.frFR,
+                    zhCN=entry.zhCN if entry.zhCN else translation.zhCN,
+                    esES=entry.esES if entry.esES else translation.esES,
+                )
+            except DecodeError:
+                logger.error(
+                    f"Tried to translate {entry.SimpleName} but "
+                    "a json decode error occurred. Tried to parse this:\n"
+                    f"{reply}"
+                )
+                return entry
+            except Exception as err:
+                errors.append(err)
         error_msg = "\n".join(str(err) for err in errors)
         logger.warning(
             f"Tried to translate {entry.SimpleName} but failed "
@@ -103,6 +101,7 @@ class OpenAIAPI(TranslatorAPI):
         max_retries: int = 3,
     ) -> list[Task[LocalizedString]]:
         """Get a list of the translation tasks."""
+        # TODO: no usages because current implementation is synchronous
         return [
             create_task(
                 self.get_translation(

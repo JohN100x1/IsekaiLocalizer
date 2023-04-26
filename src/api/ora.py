@@ -12,16 +12,20 @@ from msgspec.json import decode as json_decode
 from api import TranslatorAPI
 from models import LocalizationPack, LocalizedString, Translation
 
+# TODO: This api no longer works
+
 
 class OraAPI(TranslatorAPI):
     ORA_CHAR_LIMIT = 1000
     SYSTEM_PROMPT = (
-        "Translate the user input from English to russian (ruRU), "
-        "german (deDE), french (frFR), chinese (zhCN), and spanish (esES) "
-        "and return a json object where the language ISO is the key and "
-        "the translation is the value. Do not return anything other than the"
-        "json object. The object should follow this format with the null "
-        "values replaced with the corresponding translation:\n"
+        "You are a translator. You will translate the user input from English "
+        "to russian (ruRU), german (deDE), french (frFR), chinese (zhCN), "
+        "and spanish (esES) and return a json object where the language ISO "
+        "is the key and the translation is the value. Do not return anything "
+        "other than the json object and will do your best at translating in "
+        "the context of homebrew Pathfinder feature names and descriptions. "
+        "The object should follow this format with the null values replaced "
+        "with the corresponding translation:\n"
         '{"ruRU": null,"deDE": null,"frFR": null,"zhCN": null,"esES": null}'
     )
     DESC = "ChatGPT Openai Language Model"
@@ -95,7 +99,7 @@ class OraAPI(TranslatorAPI):
             "rv:109.0) Gecko/20100101 Firefox/112.0",
             "origin": "https://ora.sh",
             "referer": "https://ora.sh/chat/",
-        }  # TODO: add x-signed-token to header
+        }
         data_json = {
             "chatbotId": self.chat_id,
             "input": entry.enGB,
