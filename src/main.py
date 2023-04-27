@@ -7,7 +7,8 @@ if __name__ == "__main__":
     replace: bool = True
     json_indent: int = 2
 
-    path_pack = Path(__file__).parent.parent / "data" / "LocalizationPack.json"
+    # path_pack = Path(__file__).parent.parent / "data" / "LocalizationPack.json"
+    path_pack = Path(__file__).parent.parent / "data" / "ProblematicPack.json"
     # path_pack = Path(__file__).parent.parent / "data" / "TestPack.json"
     translator_api = OpenAIAPI.create()
     translator = PackTranslator(translator_api)

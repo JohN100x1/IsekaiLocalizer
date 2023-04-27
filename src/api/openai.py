@@ -47,7 +47,7 @@ class OpenAIAPI(TranslatorAPI):
     def get_translation(self, entry: LocalizedString) -> LocalizedString:
         """Get the translation for a LocalizedString."""
         if self.rate_limited:
-            logger.info(f"{entry.SimpleName} skipped due to rate limit.")
+            logger.warning(f"{entry.SimpleName} skipped due to rate limit.")
             return entry
         if all((entry.ruRU, entry.deDE, entry.frFR, entry.zhCN, entry.esES)):
             logger.info(

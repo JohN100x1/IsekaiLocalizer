@@ -1,0 +1,59 @@
+{
+  "LocalizedStrings": [
+    {
+      "Key": "efc15fc2c3074831b70d2b828f627209",
+      "SimpleName": "AdministratorDFeature.Description",
+      "ProcessTemplates": true,
+      "enGB": "Administrator D is a playful, self-proclaimed \"Ultimate evil god\" that does things simply for entertainment. She is sadistic and enjoys watching the protagonist struggle for survival in the new world for her own amusement.\nDomains: Chaos, Evil, Knowledge, Death, Destruction\nFavoured Weapon: Scythe",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    },
+    {
+      "Key": "02fb5d2ee5244f639393a199eedff6d5",
+      "SimpleName": "Afterimage.Description",
+      "ProcessTemplates": true,
+      "enGB": "At 8th level, your movements are so fast that they leave an afterimage for your enemies.\nYou gain a +10 {g|Encyclopedia:Bonus}bonus{/g} to your {g|Encyclopedia:Speed}speed{/g} and any {g|Encyclopedia:Attack}attack{/g} targeting you has a 10% chance to miss.",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    },
+    {
+      "Key": "989b268fc3a24a99bebf477552942114",
+      "SimpleName": "BackgroundBetaTester.Description",
+      "ProcessTemplates": true,
+      "enGB": "The Beta Tester has a +4 competence bonus to initiative and adds {g|Encyclopedia:Lore_Nature}Lore (Nature){/g}, {g|Encyclopedia:Lore_Religion}Lore (Religion){/g}, {g|Encyclopedia:Knowledge_World}Knowledge (World){/g}, {g|Encyclopedia:Knowledge_Arcana}Knowledge (Arcana){/g}, and {g|Encyclopedia:Perception}Perception{/g} to the list of her class {g|Encyclopedia:Skills}skills{/g}.\nIf the character already has the class skill, {g|Encyclopedia:Weapon_Proficiency}weapon proficiency{/g} or armor proficiency granted by the selected background from her class during character creation, then the corresponding {g|Encyclopedia:Bonus}bonuses{/g} from background change to a +1 competence bonus in case of skills, a +1 enhancement bonus in case of weapon proficiency and a -1 Armor {g|Encyclopedia:Check}Check{/g} {g|Encyclopedia:Penalty}Penalty{/g} reduction in case of armor proficiency.",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    },
+    {
+      "Key": "3558bfdefb8c4717b6eb9797633d2d53",
+      "SimpleName": "BackgroundDemonicCultivator.Description",
+      "ProcessTemplates": true,
+      "enGB": "The Demonic Cultivator adds Athletics and Mobility to the list of her class skills and uses the higher of Strength and Dexterity while attempting Athletics and Mobility Checks.\nIf the character already has the class skill, {g|Encyclopedia:Weapon_Proficiency}weapon proficiency{/g} or armor proficiency granted by the selected background from her class during character creation, then the corresponding {g|Encyclopedia:Bonus}bonuses{/g} from background change to a +1 competence bonus in case of skills, a +1 enhancement bonus in case of weapon proficiency and a -1 Armor {g|Encyclopedia:Check}Check{/g} {g|Encyclopedia:Penalty}Penalty{/g} reduction in case of armor proficiency.",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    },
+    {
+      "Key": "45086c63b645427fa0d8a1394736bbf7",
+      "SimpleName": "BackgroundEnlightenedSage.Description",
+      "ProcessTemplates": true,
+      "enGB": "The Enlightened Sage adds {g|Encyclopedia:Lore_Nature}Lore (Nature){/g}, {g|Encyclopedia:Lore_Religion}Lore (Religion){/g}, {g|Encyclopedia:Knowledge_World}Knowledge (World){/g}, {g|Encyclopedia:Knowledge_Arcana}Knowledge (Arcana){/g}, and {g|Encyclopedia:Perception}Perception{/g} to the list of her class {g|Encyclopedia:Skills}skills{/g} and can use the higher of {g|Encyclopedia:Intelligence}Intelligence{/g} and {g|Encyclopedia:Wisdom}Wisdom{/g} while attempting Knowledge (World), Knowledge (Arcana), Lore (Religion), or Lore (Nature) {g|Encyclopedia:Check}checks{/g}.\nIf the character already has the class skill, {g|Encyclopedia:Weapon_Proficiency}weapon proficiency{/g} or armor proficiency granted by the selected background from her class during character creation, then the corresponding {g|Encyclopedia:Bonus}bonuses{/g} from background change to a +1 competence bonus in case of skills, a +1 enhancement bonus in case of weapon proficiency and a -1 Armor {g|Encyclopedia:Check}Check{/g} {g|Encyclopedia:Penalty}Penalty{/g} reduction in case of armor proficiency.",
+      "ruRU": null,
+      "deDE": null,
+      "frFR": null,
+      "zhCN": null,
+      "esES": null
+    }
+  ]
+}
