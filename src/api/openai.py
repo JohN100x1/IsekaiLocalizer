@@ -26,8 +26,7 @@ class OpenAIAPI(TranslatorAPI):
         "other than the json object and do your best at translating in "
         "the context of a homebrew Pathfinder game. "
         "The object should follow this format with the null values replaced "
-        "with the corresponding translation, the translation value should "
-        "be a string:\n"
+        "with the corresponding translated input string:\n"
         '{"ruRU": null,"deDE": null,"frFR": null,"zhCN": null,"esES": null}'
     )
 
