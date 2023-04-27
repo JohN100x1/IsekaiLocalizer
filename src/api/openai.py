@@ -44,9 +44,7 @@ class OpenAIAPI(TranslatorAPI):
 
     def get_translation(self, entry: LocalizedString) -> LocalizedString:
         """Get the translation for a LocalizedString."""
-        if not all(
-            (entry.ruRU, entry.deDE, entry.frFR, entry.zhCN, entry.esES)
-        ):
+        if all((entry.ruRU, entry.deDE, entry.frFR, entry.zhCN, entry.esES)):
             logger.info(
                 f"{entry.SimpleName} already has a translation; skipped."
             )
