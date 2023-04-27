@@ -83,7 +83,7 @@ class OpenAIAPI(TranslatorAPI):
             )
             return entry
         except Exception as err:
-            logger.warning(
+            logger.error(
                 f"Tried to translate {entry.SimpleName} but failed. "
                 f"OpenAI api returned this error:\n{err}"
             )
