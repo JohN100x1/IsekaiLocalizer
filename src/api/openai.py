@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from loguru import logger
 from msgspec import DecodeError
 from msgspec.json import decode as json_decode
+from revChatGPT.typings import Error
 from revChatGPT.V1 import Chatbot
 
 from api import TranslatorAPI
@@ -31,6 +32,7 @@ class OpenAIAPI(TranslatorAPI):
 
     def __init__(self, access_token: str):
         self.access_token = access_token
+        self.rate_limited = False
 
     @classmethod
     def create(cls) -> Self:
@@ -44,6 +46,9 @@ class OpenAIAPI(TranslatorAPI):
 
     def get_translation(self, entry: LocalizedString) -> LocalizedString:
         """Get the translation for a LocalizedString."""
+        if self.rate_limited:
+            logger.info(f"{entry.SimpleName} skipped due to rate limit.")
+            return entry
         if all((entry.ruRU, entry.deDE, entry.frFR, entry.zhCN, entry.esES)):
             logger.info(
                 f"{entry.SimpleName} already has a translation; skipped."
@@ -64,6 +69,7 @@ class OpenAIAPI(TranslatorAPI):
             chatbot.delete_conversation(conversation_id)
             reply_json = re.findall(r"\{[\s\S]*}", reply)[0]
             translation = json_decode(reply_json, type=Translation)
+            logger.info(f"{entry.SimpleName} translated successfully.")
             return LocalizedString(
                 Key=entry.Key,
                 SimpleName=entry.SimpleName,
@@ -82,6 +88,15 @@ class OpenAIAPI(TranslatorAPI):
                 f"{reply}"
             )
             return entry
+        except Error as err:
+            # Rate Limit Error
+            if err.code == 429:
+                self.rate_limited = True
+            logger.error(
+                f"Tried to translate {entry.SimpleName} but failed. "
+                f"OpenAI api returned this error:\n{err}"
+            )
+            return entry
         except Exception as err:
             logger.error(
                 f"Tried to translate {entry.SimpleName} but failed. "
@@ -91,12 +106,9 @@ class OpenAIAPI(TranslatorAPI):
 
     async def translate(self, pack: LocalizationPack) -> LocalizationPack:
         """Translate the localization pack."""
-        # TODO: entry replacement logic (so filled entries are re-translated)
         localised_strings = []
-        n = len(pack.LocalizedStrings)
-        for i, entry in enumerate(pack.LocalizedStrings, 1):
+        for entry in pack.LocalizedStrings:
             localised_strings.append(self.get_translation(entry))
-            print(f"Entries translated: {i} ({i/n:.3%})")
         return LocalizationPack(LocalizedStrings=localised_strings)
 
 
