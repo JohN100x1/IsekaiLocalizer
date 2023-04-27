@@ -58,10 +58,10 @@ Requirements:
 5. Run `main.py` using `python main.py` in your terminal.
 
 ## TODO
+- Address incomplete translations
 - Address Bad translations
 - Address Bad prompt for ChatGPT
-- Address Invalid response or when ChatGPT asks clarification questions
-- Address Timeout from API after `max_retries=3`
+- Address Invalid response or when ChatGPT asks clarification questions.
 - Address 1000 character limitation for ora.sh endpoint (use different endpoint?)
 - Add option to replace the same `LocalizationPack.json`.
   - Add `Override` and `fill missing` options for localized string entries.
