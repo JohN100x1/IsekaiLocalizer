@@ -35,6 +35,7 @@ class OpenAIAPI(TranslatorAPI):
     @staticmethod
     def invalid_json_resolution(chatbot: Chatbot, conversation_id: str) -> str:
         """Resolve invalid json format."""
+        # TODO: handle unfinished json
         fixing_prompt = (
             "This is not in the right json format. Please just replace the "
             "null values with the entire translated string. Also replace "
@@ -66,9 +67,6 @@ class OpenAIAPI(TranslatorAPI):
 
     def get_translation(self, entry: LocalizedString) -> LocalizedString:
         """Get the translation for a LocalizedString."""
-        if self.rate_limited:
-            logger.warning(f"{entry.SimpleName} skipped due to rate limit.")
-            return entry
         if all((entry.ruRU, entry.deDE, entry.frFR, entry.zhCN, entry.esES)):
             logger.info(
                 f"{entry.SimpleName} already has a translation; skipped."
@@ -138,5 +136,9 @@ class OpenAIAPI(TranslatorAPI):
         """Translate the localization pack."""
         localised_strings = []
         for entry in pack.LocalizedStrings:
-            localised_strings.append(self.get_translation(entry))
+            if self.rate_limited:
+                logger.warning(f"Skipping leftover entries due to rate limit.")
+                localised_strings.append(entry)
+            else:
+                localised_strings.append(self.get_translation(entry))
         return LocalizationPack(LocalizedStrings=localised_strings)
