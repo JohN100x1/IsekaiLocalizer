@@ -4,9 +4,8 @@ from api.openai import OpenAIAPI
 from pack_processors import PackSerializer, PackTranslator
 
 if __name__ == "__main__":
-    replace: bool = False
+    replace: bool = True
     json_indent: int = 2
-    max_retries: int = 3
 
     path_pack = Path(__file__).parent.parent / "data" / "LocalizationPack.json"
     # path_pack = Path(__file__).parent.parent / "data" / "TestPack.json"

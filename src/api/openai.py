@@ -23,7 +23,7 @@ class OpenAIAPI(TranslatorAPI):
         "and spanish (esES) and return a json object where the language ISO "
         "is the key and the translation is the value. Do not return anything "
         "other than the json object and will do your best at translating in "
-        "the context of homebrew Pathfinder feature names and descriptions. "
+        "the context of a homebrew Pathfinder game. "
         "The object should follow this format with the null values replaced "
         "with the corresponding translation:\n"
         '{"ruRU": null,"deDE": null,"frFR": null,"zhCN": null,"esES": null}'
@@ -44,8 +44,13 @@ class OpenAIAPI(TranslatorAPI):
 
     def get_translation(self, entry: LocalizedString) -> LocalizedString:
         """Get the translation for a LocalizedString."""
-        chatbot = Chatbot(config={"access_token": self.access_token})
-        conversation_id = self.start(chatbot)
+        if not all(
+            (entry.ruRU, entry.deDE, entry.frFR, entry.zhCN, entry.esES)
+        ):
+            logger.info(
+                f"{entry.SimpleName} already has a translation; skipped."
+            )
+            return entry
         if len(entry.enGB or "") >= self.OPENAI_CHAR_LIMIT:
             logger.warning(
                 f"{entry.SimpleName} exceeds {self.OPENAI_CHAR_LIMIT} "
@@ -53,9 +58,11 @@ class OpenAIAPI(TranslatorAPI):
             )
             return entry
         reply: str = ""
-        for response in chatbot.ask(entry.enGB, conversation_id):
-            reply = response["message"]
         try:
+            chatbot = Chatbot(config={"access_token": self.access_token})
+            conversation_id = self.start(chatbot)
+            for response in chatbot.ask(entry.enGB, conversation_id):
+                reply = response["message"]
             chatbot.delete_conversation(conversation_id)
             reply_json = re.findall(r"\{[\s\S]*}", reply)[0]
             translation = json_decode(reply_json, type=Translation)
