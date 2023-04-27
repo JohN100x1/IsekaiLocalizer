@@ -23,10 +23,11 @@ class OpenAIAPI(TranslatorAPI):
         "to russian (ruRU), german (deDE), french (frFR), chinese (zhCN), "
         "and spanish (esES) and return a json object where the language ISO "
         "is the key and the translation is the value. Do not return anything "
-        "other than the json object and will do your best at translating in "
+        "other than the json object and do your best at translating in "
         "the context of a homebrew Pathfinder game. "
         "The object should follow this format with the null values replaced "
-        "with the corresponding translation:\n"
+        "with the corresponding translation, the translation value should "
+        "be a string:\n"
         '{"ruRU": null,"deDE": null,"frFR": null,"zhCN": null,"esES": null}'
     )
 
