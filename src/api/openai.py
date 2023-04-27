@@ -1,7 +1,5 @@
 import os
 import re
-from asyncio import run
-from pathlib import Path
 from typing import Self
 
 from dotenv import load_dotenv
@@ -13,7 +11,6 @@ from revChatGPT.V1 import Chatbot
 
 from api import TranslatorAPI
 from models import LocalizationPack, LocalizedString, Translation
-from pack_processors import PackSerializer
 
 
 class OpenAIAPI(TranslatorAPI):
