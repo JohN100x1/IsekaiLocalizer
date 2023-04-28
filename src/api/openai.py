@@ -151,10 +151,13 @@ Make sure newlines are quotes are escaped"""
     async def translate(self, pack: LocalizationPack) -> LocalizationPack:
         """Translate the localization pack."""
         localised_strings = []
+        skip_count = 0
         for entry in pack.LocalizedStrings:
             if self.rate_limited:
-                logger.warning(f"Skipping leftover entries due to rate limit.")
+                skip_count += 1
                 localised_strings.append(entry)
             else:
                 localised_strings.append(self.get_translation(entry))
+        if self.rate_limited:
+            logger.warning(f"Skipping {skip_count} entries due to rate limit.")
         return LocalizationPack(LocalizedStrings=localised_strings)
