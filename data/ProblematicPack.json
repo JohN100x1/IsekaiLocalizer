@@ -1,59 +1,15 @@
 {
   "LocalizedStrings": [
     {
-      "Key": "efc15fc2c3074831b70d2b828f627209",
-      "SimpleName": "AdministratorDFeature.Description",
-      "ProcessTemplates": true,
-      "enGB": "Administrator D is a playful, self-proclaimed \"Ultimate evil god\" that does things simply for entertainment. She is sadistic and enjoys watching the protagonist struggle for survival in the new world for her own amusement.\nDomains: Chaos, Evil, Knowledge, Death, Destruction\nFavoured Weapon: Scythe",
-      "ruRU": null,
-      "deDE": null,
-      "frFR": null,
-      "zhCN": null,
-      "esES": null
-    },
-    {
-      "Key": "02fb5d2ee5244f639393a199eedff6d5",
-      "SimpleName": "Afterimage.Description",
-      "ProcessTemplates": true,
-      "enGB": "At 8th level, your movements are so fast that they leave an afterimage for your enemies.\nYou gain a +10 {g|Encyclopedia:Bonus}bonus{/g} to your {g|Encyclopedia:Speed}speed{/g} and any {g|Encyclopedia:Attack}attack{/g} targeting you has a 10% chance to miss.",
-      "ruRU": null,
-      "deDE": null,
-      "frFR": null,
-      "zhCN": null,
-      "esES": null
-    },
-    {
-      "Key": "989b268fc3a24a99bebf477552942114",
-      "SimpleName": "BackgroundBetaTester.Description",
-      "ProcessTemplates": true,
-      "enGB": "The Beta Tester has a +4 competence bonus to initiative and adds {g|Encyclopedia:Lore_Nature}Lore (Nature){/g}, {g|Encyclopedia:Lore_Religion}Lore (Religion){/g}, {g|Encyclopedia:Knowledge_World}Knowledge (World){/g}, {g|Encyclopedia:Knowledge_Arcana}Knowledge (Arcana){/g}, and {g|Encyclopedia:Perception}Perception{/g} to the list of her class {g|Encyclopedia:Skills}skills{/g}.\nIf the character already has the class skill, {g|Encyclopedia:Weapon_Proficiency}weapon proficiency{/g} or armor proficiency granted by the selected background from her class during character creation, then the corresponding {g|Encyclopedia:Bonus}bonuses{/g} from background change to a +1 competence bonus in case of skills, a +1 enhancement bonus in case of weapon proficiency and a -1 Armor {g|Encyclopedia:Check}Check{/g} {g|Encyclopedia:Penalty}Penalty{/g} reduction in case of armor proficiency.",
-      "ruRU": null,
-      "deDE": null,
-      "frFR": null,
-      "zhCN": null,
-      "esES": null
-    },
-    {
-      "Key": "3558bfdefb8c4717b6eb9797633d2d53",
-      "SimpleName": "BackgroundDemonicCultivator.Description",
-      "ProcessTemplates": true,
-      "enGB": "The Demonic Cultivator adds Athletics and Mobility to the list of her class skills and uses the higher of Strength and Dexterity while attempting Athletics and Mobility Checks.\nIf the character already has the class skill, {g|Encyclopedia:Weapon_Proficiency}weapon proficiency{/g} or armor proficiency granted by the selected background from her class during character creation, then the corresponding {g|Encyclopedia:Bonus}bonuses{/g} from background change to a +1 competence bonus in case of skills, a +1 enhancement bonus in case of weapon proficiency and a -1 Armor {g|Encyclopedia:Check}Check{/g} {g|Encyclopedia:Penalty}Penalty{/g} reduction in case of armor proficiency.",
-      "ruRU": null,
-      "deDE": null,
-      "frFR": null,
-      "zhCN": null,
-      "esES": null
-    },
-    {
       "Key": "45086c63b645427fa0d8a1394736bbf7",
       "SimpleName": "BackgroundEnlightenedSage.Description",
       "ProcessTemplates": true,
       "enGB": "The Enlightened Sage adds {g|Encyclopedia:Lore_Nature}Lore (Nature){/g}, {g|Encyclopedia:Lore_Religion}Lore (Religion){/g}, {g|Encyclopedia:Knowledge_World}Knowledge (World){/g}, {g|Encyclopedia:Knowledge_Arcana}Knowledge (Arcana){/g}, and {g|Encyclopedia:Perception}Perception{/g} to the list of her class {g|Encyclopedia:Skills}skills{/g} and can use the higher of {g|Encyclopedia:Intelligence}Intelligence{/g} and {g|Encyclopedia:Wisdom}Wisdom{/g} while attempting Knowledge (World), Knowledge (Arcana), Lore (Religion), or Lore (Nature) {g|Encyclopedia:Check}checks{/g}.\nIf the character already has the class skill, {g|Encyclopedia:Weapon_Proficiency}weapon proficiency{/g} or armor proficiency granted by the selected background from her class during character creation, then the corresponding {g|Encyclopedia:Bonus}bonuses{/g} from background change to a +1 competence bonus in case of skills, a +1 enhancement bonus in case of weapon proficiency and a -1 Armor {g|Encyclopedia:Check}Check{/g} {g|Encyclopedia:Penalty}Penalty{/g} reduction in case of armor proficiency.",
-      "ruRU": null,
-      "deDE": null,
-      "frFR": null,
-      "zhCN": null,
-      "esES": null
+      "ruRU": "Просвященный Мудрец добавляет Лор (Природа), Лор (Религия), Знание (Мир), Знание (Магия) и Восприятие в список её навыков класса, а также может использовать более высокие показатели Интеллекта и Мудрости при попытках проверки Знания (Мир), Знания (Магия), Лора (Религия) или Лора (Природа). Если персонаж уже имеет навык класса, владеет оружием или доспехами, предоставленными выбранным фоном во время создания персонажа, то соответствующие бонусы изменяются на компетентность +1 в случае навыков, улучшение +1 в случае владения оружием и снижение штрафа проверки брони -1 в случае владения доспехами.",
+      "deDE": "Der erleuchtete Weise fügt ihrem Klassenfertigkeiten-Set Wissen (Natur), Wissen (Religion), Wissen (Welt), Wissen (Arkan) und Wahrnehmung hinzu. Sie kann zudem den höheren Wert von Intelligenz und Weisheit verwenden, wenn sie Fertigkeitsproben in Wissen (Welt), Wissen (Arkan), Wissen (Religion) oder Wissen (Natur) ablegt. Falls der Charakter bereits die Klassenfertigkeit, Waffen- oder Rüstungsbeherrschung erhält, die durch den ausgewählten Hintergrund bei der Charaktererstellung gewährt wird, ändern sich die entsprechenden Boni aus dem Hintergrund zu einem Kompetenzbonus von +1 bei Fertigkeiten, einem Verbesserungsbonus von +1 bei Waffenbeherrschung und einer -1 Rüstungsüberprüfung.",
+      "frFR": "Le Sage éclairé ajoute les compétences Connaissance (Nature), Connaissance (Religion), Connaissance (Monde), Connaissance (Arcane) et Perception à sa liste de compétences de classe, et peut utiliser le score le plus élevé d'Intelligence ou de Sagesse lorsqu'elle tente des épreuves de Connaissance (Monde), Connaissance (Arcane), Connaissance (Religion) ou Connaissance (Nature). Si le personnage possède déjà la compétence de classe, la maîtrise des armes ou la maîtrise des armures accordée par l'arrière-plan sélectionné lors de la création du personnage, les bonus correspondants de l'arrière-plan changent en un bonus de compétence de +1 dans le cas des compétences, un bonus d'amélioration de +1 dans le cas de la maîtrise des armes et une réduction de -1 en cas de vérification d'armure.",
+      "zhCN": "启蒙的贤者将「自然知识」、「宗教知识」、「世界知识」、「奥术知识」和「感知」添加到其职业技能列表中，并在尝试「世界知识」、「奥术知识」、「宗教知识」或「自然知识」的检定时，可以使用较高的智力或感知值。如果角色已经拥有与所选背景相关的职业技能、武器熟练度或护甲熟练度，则相应的背景奖励变为：技能上的+1熟练加成、武器熟练度上的+1增强加成以及护甲熟练度上的-1盔甲检定惩罚。",
+      "esES": "El Sabio Iluminado añade Saber (Naturaleza), Saber (Religión), Conocimiento (Mundo), Conocimiento (Arcano) y Percepción a la lista de sus habilidades de clase y puede usar el valor más alto entre Inteligencia y Sabiduría mientras intenta pruebas de Saber (Mundo), Saber (Arcano), Saber (Religión) o Saber (Naturaleza). Si el personaje ya tiene la habilidad de clase, la habilidad con armas o la habilidad con armaduras concedida por el trasfondo seleccionado durante la creación del personaje, entonces los correspondientes bonos de trasfondo cambian a un bono de competencia de +1 en el caso de las habilidades, un bono de mejora de +1 en el caso de la habilidad con armas y una reducción de -1 en la comprobación de armadura en el caso de la habilidad con armaduras."
     }
   ]
 }

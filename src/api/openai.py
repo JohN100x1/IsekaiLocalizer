@@ -16,11 +16,10 @@ from models import LocalizationPack, LocalizedString, Translation
 class OpenAIAPI(TranslatorAPI):
     OPENAI_CHAR_LIMIT = 4000
     SYSTEM_PROMPT = """Act as a translator. You will translate the user input from English to russian, german, french, chinese, and spanish. Return this translation as a json object with the following format:
-    {"ruRU": null,"deDE": null,"frFR": null,"zhCN": null,"esES": null}
-    where the null values are replaced with the corresponding translation.
-    Do not return anything other than the json object and do your best at translating in the context of a homebrew Pathfinder game.
-    Newlines should be converted to \n and " should be converted to \"
-    """
+{"ruRU": null,"deDE": null,"frFR": null,"zhCN": null,"esES": null}
+where the null values are replaced with the corresponding translation.
+Do not return anything other than the json object and do your best at translating in the context of a homebrew Pathfinder game.
+Make sure newlines are quotes are escaped"""
 
     def __init__(self, access_token: str):
         self.access_token = access_token
@@ -31,20 +30,6 @@ class OpenAIAPI(TranslatorAPI):
         """Create an instance of the OpenAIAPI."""
         load_dotenv()
         return cls(os.getenv("OPENAI_ACCESS_TOKEN", ""))
-
-    @staticmethod
-    def invalid_json_resolution(chatbot: Chatbot, conversation_id: str) -> str:
-        """Resolve invalid json format."""
-        # TODO: handle unfinished json
-        fixing_prompt = (
-            "This is not in the right json format. Please just replace the "
-            "null values with the entire translated string. Also replace "
-            r"\n\n with a single \n and make sure quotes are escaped."
-        )
-        reply: str = ""
-        for response in chatbot.ask(fixing_prompt, conversation_id):
-            reply = response["message"]
-        return reply
 
     @staticmethod
     def extract_localized_string(
@@ -65,6 +50,52 @@ class OpenAIAPI(TranslatorAPI):
             esES=entry.esES if entry.esES else translation.esES,
         )
 
+    def retry_get_translation(
+        self, chatbot: Chatbot, conversation_id: str, entry: LocalizedString
+    ) -> LocalizedString:
+        """Retry getting the translation for a LocalizedString."""
+        replies = [""]
+        try:
+            fixing_prompt = (
+                "This is not the right json format. Please just replace the "
+                "null values with the entire translated string."
+            )
+            finish_details = "max_tokens"
+            for response in chatbot.ask(fixing_prompt, conversation_id):
+                replies[0] = response["message"]
+                finish_details = response["finish_details"]
+            finished = finish_details == "stop"
+            while not finished:
+                reply = ""
+                for response in chatbot.ask("continue", conversation_id):
+                    reply = response["message"]
+                    finish_details = response["finish_details"]
+                replies.append(reply)
+                finished = finish_details == "stop"
+            return self.extract_localized_string(entry, "".join(replies))
+        except DecodeError:
+            logger.error(
+                f"Tried to translate {entry.SimpleName} but "
+                "a json decode error occurred. Tried to parse this:\n"
+                f"{''.join(replies)}"
+            )
+            return entry
+        except Error as err:
+            # Rate Limit Error
+            if err.code == 429:
+                self.rate_limited = True
+            logger.error(
+                f"Tried to translate {entry.SimpleName} but failed. "
+                f"OpenAI api returned this error:\n{err}"
+            )
+            return entry
+        except Exception as err:
+            logger.error(
+                f"Tried to translate {entry.SimpleName} but failed. "
+                f"OpenAI api returned this error:\n{err}"
+            )
+            return entry
+
     def get_translation(self, entry: LocalizedString) -> LocalizedString:
         """Get the translation for a LocalizedString."""
         if all((entry.ruRU, entry.deDE, entry.frFR, entry.zhCN, entry.esES)):
@@ -78,42 +109,27 @@ class OpenAIAPI(TranslatorAPI):
                 "characters; cannot translate."
             )
             return entry
-        reply: str = ""
+        replies = [""]
         conversation_id: str = ""
         chatbot = Chatbot(config={"access_token": self.access_token})
         try:
             for data in chatbot.ask(self.SYSTEM_PROMPT):
                 conversation_id = data["conversation_id"]
+            finish_details = "max_tokens"
             for response in chatbot.ask(entry.enGB, conversation_id):
-                reply = response["message"]
-            return self.extract_localized_string(entry, reply)
+                replies[0] = response["message"]
+                finish_details = response["finish_details"]
+            finished = finish_details == "stop"
+            while not finished:
+                reply = ""
+                for response in chatbot.ask("continue", conversation_id):
+                    reply = response["message"]
+                    finish_details = response["finish_details"]
+                replies.append(reply)
+                finished = finish_details == "stop"
+            return self.extract_localized_string(entry, "".join(replies))
         except DecodeError:
-            try:
-                # Try again with a fixing prompt
-                reply = self.invalid_json_resolution(chatbot, conversation_id)
-                return self.extract_localized_string(entry, reply)
-            except DecodeError:
-                logger.error(
-                    f"Tried to translate {entry.SimpleName} but "
-                    "a json decode error occurred. Tried to parse this:\n"
-                    f"{reply}"
-                )
-                return entry
-            except Error as err:
-                # Rate Limit Error
-                if err.code == 429:
-                    self.rate_limited = True
-                logger.error(
-                    f"Tried to translate {entry.SimpleName} but failed. "
-                    f"OpenAI api returned this error:\n{err}"
-                )
-                return entry
-            except Exception as err:
-                logger.error(
-                    f"Tried to translate {entry.SimpleName} but failed. "
-                    f"OpenAI api returned this error:\n{err}"
-                )
-                return entry
+            return self.retry_get_translation(chatbot, conversation_id, entry)
         except Error as err:
             # Rate Limit Error
             if err.code == 429:
