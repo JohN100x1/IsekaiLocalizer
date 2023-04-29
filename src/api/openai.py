@@ -98,17 +98,6 @@ Make sure newlines are quotes are escaped"""
 
     def get_translation(self, entry: LocalizedString) -> LocalizedString:
         """Get the translation for a LocalizedString."""
-        if all((entry.ruRU, entry.deDE, entry.frFR, entry.zhCN, entry.esES)):
-            logger.info(
-                f"{entry.SimpleName} already has a translation; skipped."
-            )
-            return entry
-        if len(entry.enGB or "") >= self.OPENAI_CHAR_LIMIT:
-            logger.warning(
-                f"{entry.SimpleName} exceeds {self.OPENAI_CHAR_LIMIT} "
-                "characters; cannot translate."
-            )
-            return entry
         replies = [""]
         conversation_id: str = ""
         chatbot = Chatbot(config={"access_token": self.access_token})
@@ -158,13 +147,29 @@ Make sure newlines are quotes are escaped"""
     def translate(self, pack: LocalizationPack) -> LocalizationPack:
         """Translate the localization pack."""
         localised_strings = []
-        skip_count = 0
+        rate_limited = 0
+        already_translated = 0
+        character_limited = 0
         for entry in pack.LocalizedStrings:
             if self.rate_limited:
-                skip_count += 1
+                localised_strings.append(entry)
+                rate_limited += 1
+            elif all(
+                (entry.ruRU, entry.deDE, entry.frFR, entry.zhCN, entry.esES)
+            ):
+                already_translated += 1
+                localised_strings.append(entry)
+            elif len(entry.enGB or "") >= self.OPENAI_CHAR_LIMIT:
+                character_limited += 1
                 localised_strings.append(entry)
             else:
                 localised_strings.append(self.get_translation(entry))
-        if self.rate_limited:
-            logger.warning(f"Skipping {skip_count} entries due to rate limit.")
+        logger.info(
+            f"Skipped {already_translated} entries due to existing "
+            "translation."
+        )
+        logger.warning(
+            f"Skipped {character_limited} entries due to character limit."
+        )
+        logger.warning(f"Skipped {rate_limited} entries due to rate limit.")
         return LocalizationPack(LocalizedStrings=localised_strings)
