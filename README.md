@@ -55,7 +55,7 @@ Requirements:
 2. Install dependencies using `poetry install` in your terminal.
 3. Create Open AI account and get your access token from here https://chat.openai.com/api/auth/session.
 4. Rename `example.env` to `.env` and set `OPENAI_ACCESS_TOKEN` to your access token.
-5. Run `main.py` using `python main.py` in your terminal.
+5. Run `main.py` using `poetry run python src/main.py` in your terminal.
 
 ## TODO
 - Address incomplete translations
@@ -63,5 +63,3 @@ Requirements:
 - Address Bad prompt for ChatGPT
 - Address Invalid response or when ChatGPT asks clarification questions.
 - Address 1000 character limitation for ora.sh endpoint (use different endpoint?)
-- Add option to replace the same `LocalizationPack.json`.
-  - Add `Override` and `fill missing` options for localized string entries.
