@@ -147,10 +147,11 @@ Make sure newlines are quotes are escaped"""
             return entry
         finally:
             try:
+                # conversation_id can be empty if it fails to ask SYSTEM_PROMPT
                 chatbot.delete_conversation(conversation_id)
             except Exception as err:
                 logger.warning(
-                    f"{conversation_id=} could not be deleted."
+                    f"{conversation_id=} could not be deleted. "
                     f"OpenAI api returned this error:\n{err}"
                 )
 
