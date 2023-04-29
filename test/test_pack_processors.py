@@ -84,7 +84,7 @@ class DummyTranslatorAPI(TranslatorAPI):
     def create(cls) -> Self:
         return cls()
 
-    async def translate(self, pack: LocalizationPack) -> LocalizationPack:
+    def translate(self, pack: LocalizationPack) -> LocalizationPack:
         return LocalizationPack(
             LocalizedStrings=[
                 LocalizedString(
