@@ -161,7 +161,13 @@ class OraAPI(TranslatorAPI):
             for entry in pack.LocalizedStrings
         ]
 
-    async def translate(self, pack: LocalizationPack) -> LocalizationPack:
+    def translate(self, pack: LocalizationPack) -> LocalizationPack:
+        """Translate the localization pack."""
+        return run(self.async_translate(pack))
+
+    async def async_translate(
+        self, pack: LocalizationPack
+    ) -> LocalizationPack:
         """Translate the localization pack."""
         async with ClientSession() as session:
             translation_tasks = self.get_translation_tasks(

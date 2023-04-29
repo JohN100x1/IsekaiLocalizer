@@ -12,6 +12,6 @@ class TranslatorAPI(ABC):
         ...
 
     @abstractmethod
-    async def translate(self, pack: LocalizationPack) -> LocalizationPack:
+    def translate(self, pack: LocalizationPack) -> LocalizationPack:
         """Translate the localization pack from enGB."""
         ...

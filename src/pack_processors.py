@@ -29,4 +29,4 @@ class PackTranslator:
 
     def translate(self, pack: LocalizationPack) -> LocalizationPack:
         """Translate the localization pack."""
-        return asyncio.run(self.translator_api.translate(pack))
+        return self.translator_api.translate(pack)

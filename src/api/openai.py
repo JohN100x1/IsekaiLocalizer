@@ -146,9 +146,15 @@ Make sure newlines are quotes are escaped"""
             )
             return entry
         finally:
-            chatbot.delete_conversation(conversation_id)
+            try:
+                chatbot.delete_conversation(conversation_id)
+            except Exception as err:
+                logger.warning(
+                    f"{conversation_id=} could not be deleted."
+                    f"OpenAI api returned this error:\n{err}"
+                )
 
-    async def translate(self, pack: LocalizationPack) -> LocalizationPack:
+    def translate(self, pack: LocalizationPack) -> LocalizationPack:
         """Translate the localization pack."""
         localised_strings = []
         skip_count = 0
