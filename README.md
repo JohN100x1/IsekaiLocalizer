@@ -4,13 +4,12 @@
 [![Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Create localization using ChatGPT. For an input `LocalizationPack.json`,
-the output `LocalizationPackTranslated.json` will have `null` values filled
-using the translated English value. Currently only supports translation from
-English to the other languages.
+the output will have `null` values filled using the translated English value.
+Currently only supports translation from English to the other languages.
 
-Disclaimer: the results are from ChatGPT, so you may not get accurate results.
+**Disclaimer**: the results are from ChatGPT, so you may not get accurate results.
 ### Example
-`LocalizationPack.json`
+Input `LocalizationPack.json`
 ```json
 {
   "LocalizedStrings": [
@@ -28,7 +27,7 @@ Disclaimer: the results are from ChatGPT, so you may not get accurate results.
   ]
 }
 ```
-Becomes `LocalizationPackTranslated.json`
+Output `LocalizationPack.json`
 ```json
 {
   "LocalizedStrings": [
@@ -58,8 +57,7 @@ Requirements:
 5. Run `main.py` using `poetry run python src/main.py` in your terminal.
 
 ## TODO
-- Address incomplete translations
 - Address Bad translations
 - Address Bad prompt for ChatGPT
-- Address Invalid response or when ChatGPT asks clarification questions.
-- Address 1000 character limitation for ora.sh endpoint (use different endpoint?)
+- Address incomplete translations
+- Address long text translations
