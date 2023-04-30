@@ -59,3 +59,4 @@ Requirements:
 ## TODO
 - Address Bad translations for long text
 - Address malformed json response
+- Address rate limits (add another endpoint?)
