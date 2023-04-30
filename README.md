@@ -57,7 +57,5 @@ Requirements:
 5. Run `main.py` using `poetry run python src/main.py` in your terminal.
 
 ## TODO
-- Address Bad translations
-- Address Bad prompt for ChatGPT
-- Address incomplete translations
-- Address long text translations
+- Address Bad translations for long text
+- Address malformed json response
