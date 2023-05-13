@@ -29,6 +29,9 @@ Make sure newlines are quotes are escaped"""
     def create(cls) -> Self:
         """Create an instance of the OpenAIAPI."""
         load_dotenv()
+        os.environ[
+            "CHATGPT_BASE_URL"
+        ] = "https://bypass.churchless.tech/conversation"
         return cls(os.getenv("OPENAI_ACCESS_TOKEN", ""))
 
     @staticmethod
