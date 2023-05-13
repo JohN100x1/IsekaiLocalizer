@@ -2,6 +2,7 @@ import os
 import re
 from typing import Self
 
+import revChatGPT
 from dotenv import load_dotenv
 from loguru import logger
 from msgspec import DecodeError
@@ -29,9 +30,7 @@ Make sure newlines are quotes are escaped"""
     def create(cls) -> Self:
         """Create an instance of the OpenAIAPI."""
         load_dotenv()
-        os.environ[
-            "CHATGPT_BASE_URL"
-        ] = "https://bypass.churchless.tech/conversation"
+        revChatGPT.V1.BASE_URL = "https://bypass.churchless.tech/"
         return cls(os.getenv("OPENAI_ACCESS_TOKEN", ""))
 
     @staticmethod

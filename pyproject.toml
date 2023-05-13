@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-msgspec = "^0.14.1"
+msgspec = "^0"
 python-dotenv = "^1.0.0"
 setuptools = "^67.7.1"
 aiohttp = "^3.8.4"

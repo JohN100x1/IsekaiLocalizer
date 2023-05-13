@@ -5,55 +5,11 @@
       "SimpleName": "$IsekaiProtagonistSpellbook.Name",
       "ProcessTemplates": false,
       "enGB": "Isekai Protagonist",
-      "ruRU": "Исэкай-протагонист",
-      "deDE": "Isekai-Hauptfigur",
-      "frFR": "Protagoniste Isekai",
+      "ruRU": "Исекай главный герой",
+      "deDE": "Isekai-Protagonist",
+      "frFR": "Protagoniste d'isekai",
       "zhCN": "异世界主角",
-      "esES": "Protagonista de Isekai"
-    },
-    {
-      "Key": "457405fbd37c412f96c2be6b5109c612",
-      "SimpleName": "PlotArmor.Description",
-      "ProcessTemplates": true,
-      "enGB": "You gain a luck bonus to {g|Encyclopedia:Armor_Class}AC{/g} and all {g|Encyclopedia:Saving_Throw}saving throws{/g} equal to your character level.",
-      "ruRU": "Вы получаете бонус удачи к {g|Encyclopedia:Armor_Class}классу доспеха{/g} и всем {g|Encyclopedia:Saving_Throw}спасброскам{/g} равный вашему уровню персонажа.",
-      "deDE": "Du erhältst einen Glücksbonus auf {g|Encyclopedia:Armor_Class}Rüstungsklasse{/g} und alle {g|Encyclopedia:Saving_Throw}Rettungswürfe{/g}, der deinem Charakterlevel entspricht.",
-      "frFR": "Vous obtenez un bonus de chance à votre {g|Encyclopedia:Armor_Class}classe d'armure{/g} et à tous vos {g|Encyclopedia:Saving_Throw}jets de sauvegarde{/g} égal à votre niveau de personnage.",
-      "zhCN": "你的护甲等级（{g|Encyclopedia:Armor_Class}Armor_Class{/g}）和所有豁免检定（{g|Encyclopedia:Saving_Throw}Saving_Throw{/g}）获得了幸运加值，等同于你的角色等级。",
-      "esES": "Obtienes un bonificación de suerte a tu {g|Encyclopedia:Armor_Class}clase de armadura{/g} y a todos tus {g|Encyclopedia:Saving_Throw}tiradas de salvación{/g} igual a tu nivel de personaje."
-    },
-    {
-      "Key": "f161809e34be41d69fead36851be775a",
-      "SimpleName": "UnlimitedPowerAbility.Name",
-      "ProcessTemplates": false,
-      "enGB": "Overpowered Ability — Unlimited Power",
-      "ruRU": "Сверхмощная способность - Бесконечная сила",
-      "deDE": "Übermächtige Fähigkeit - Unbegrenzte Macht",
-      "frFR": "Compétence surpuissante - Puissance illimitée",
-      "zhCN": "超能力-无限力量",
-      "esES": "Habilidad Sobrepoderosa - Poder Ilimitado"
-    },
-    {
-      "Key": "ac27deaf79654a76a107f202cbc6d7a1",
-      "SimpleName": "IsekaiDialogueHorgusReply.Text",
-      "ProcessTemplates": false,
-      "enGB": "\"My daughter?\" {n}Horgus takes a quick glance at Camellia.{/n} \"I don't think you know what sort of person she is. {n}Horgus takes a breath.{/n} Regardless, it seems my previous offer was somewhat insulting. Two thousand gold it is.\"",
-      "ruRU": "«Моя дочь?» {n}Хоргус быстро бросил взгляд на Камеллию.{/n} «Я не думаю, что ты знаешь, какой человек она. {n}Хоргус вздохнул.{/n} Тем не менее, похоже, что мое предыдущее предложение было некоторым оскорблением. Две тысячи золотых монет - это окончательное предложение.»",
-      "deDE": "„Meine Tochter?“ {n}Horgus wirft Camellia einen kurzen Blick zu.{/n} „Ich glaube nicht, dass du weißt, welche Art von Person sie ist. {n}Horgus atmet tief durch.{/n} Wie auch immer, es scheint, dass mein vorheriges Angebot etwas beleidigend war. Zwei tausend Goldstücke sind es wert.“",
-      "frFR": "« Ma fille ? » {n}Horgus jette un rapide coup d'œil à Camellia.{/n} « Je ne pense pas que vous sachiez quel genre de personne elle est. {n}Horgus prend une inspiration.{/n} Quoi qu'il en soit, il semble que ma précédente offre était quelque peu insultante. Deux mille pièces d'or, c'est cela. »",
-      "zhCN": "「我的女儿？」{n}霍格斯扫了一眼卡梅莉娅。{/n}「我不认为你知道她是什么样的人。{n}霍格斯深吸一口气。{/n}不管怎样，看来我之前的提议有些冒犯了。两千金币就是最终的提议。」",
-      "esES": "«¿Mi hija?» {n}Horgus echa un rápido vistazo a Camellia.{/n} «No creo que sepas qué clase de persona es. {n}Horgus respira hondo.{/n} De todas formas, parece que mi oferta anterior fue algo insultante. Dos mil piezas de oro son.»"
-    },
-    {
-      "Key": "93e8122c42ad42eea553345845569377",
-      "SimpleName": "FriendlyAura.Description",
-      "ProcessTemplates": false,
-      "enGB": "You emit an aura of friendship that cause enemies to subconsciously hold back.\nEnemies within 40 feet take a –4 penalty on attack and damage rolls.",
-      "ruRU": "Вы испускаете ауру дружелюбия, которая подсознательно заставляет врагов сдерживаться. Враги в пределах 40 футов получают штраф -4 к броскам атаки и урона.",
-      "deDE": "Du strahlst eine Aura der Freundschaft aus, die Feinde unterbewusst zurückhält. Feinde innerhalb von 40 Fuß erleiden einen Malus von -4 auf Angriffs- und Schadenswürfe.",
-      "frFR": "Vous émettez une aura d'amitié qui fait que les ennemis se retiennent subconsciemment. Les ennemis dans un rayon de 40 pieds subissent un malus de -4 aux jets d'attaque et de dégâts.",
-      "zhCN": "你散发出一股友谊的气息，使敌人下意识地退缩。在40英尺内的敌人攻击和伤害骰面都要扣除4点。",
-      "esES": "Irradias un aura de amistad que hace que los enemigos se contengan subconscientemente. Los enemigos dentro de 40 pies tienen una penalización de -4 en los tiros de ataque y de daño."
+      "esES": "Protagonista de isekai"
     }
   ]
 }
